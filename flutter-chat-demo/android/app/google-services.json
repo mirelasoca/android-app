@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "4371018154",
+    "project_id": "music-hive-c3b22",
+    "storage_bucket": "music-hive-c3b22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4371018154:android:e5587d76009a47cfc53bd3",
+        "android_client_info": {
+          "package_name": "com.dfa.flutterchatdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4371018154-6js9o16rqrg6vbd2r842fqm1gtq2r2a5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfa.flutterchatdemo",
+            "certificate_hash": "fa70b312588c0ea1f698395a78b07dfbe62f93b0"
+          }
+        },
+        {
+          "client_id": "4371018154-ochr3jhnbitrf5gsm90kvvvo4qlg71q0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNStBdGQrOH0tbLEoFuDez07IqAMlOduM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4371018154-ochr3jhnbitrf5gsm90kvvvo4qlg71q0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "4371018154-gumj8ql962hqtptigh9mjbo36aiu5ceo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.musichive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
