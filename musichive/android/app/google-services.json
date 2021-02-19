@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "4371018154",
+    "project_id": "music-hive-c3b22",
+    "storage_bucket": "music-hive-c3b22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4371018154:android:e5587d76009a47cfc53bd3",
+        "android_client_info": {
+          "package_name": "com.dfa.flutterchatdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4371018154-644bhr0bcfj574sjjgf2fce8134bo0v6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfa.flutterchatdemo",
+            "certificate_hash": "73079c69555b24733457e04a65dca18efcb347a0"
+          }
+        },
+        {
+          "client_id": "4371018154-ochr3jhnbitrf5gsm90kvvvo4qlg71q0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNStBdGQrOH0tbLEoFuDez07IqAMlOduM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4371018154-ochr3jhnbitrf5gsm90kvvvo4qlg71q0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "4371018154-gumj8ql962hqtptigh9mjbo36aiu5ceo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.musichive"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4371018154:android:c65e198f06d74887c53bd3",
+        "android_client_info": {
+          "package_name": "com.dfa.musichive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4371018154-1cmbcsrcmu9bg47qdvk2an11tg4f0rir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfa.musichive",
+            "certificate_hash": "73079c69555b24733457e04a65dca18efcb347a0"
+          }
+        },
+        {
+          "client_id": "4371018154-ochr3jhnbitrf5gsm90kvvvo4qlg71q0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNStBdGQrOH0tbLEoFuDez07IqAMlOduM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4371018154-ochr3jhnbitrf5gsm90kvvvo4qlg71q0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "4371018154-gumj8ql962hqtptigh9mjbo36aiu5ceo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.musichive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
