@@ -9,7 +9,7 @@ import 'package:musichive/widget/loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:musichive/view/pages/home_page.dart';
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key, this.title}) : super(key: key);
 
@@ -45,7 +45,8 @@ class LoginScreenState extends State<LoginScreen> {
     if (isLoggedIn) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen(currentUserId: prefs.getString('id'))),
+        //MaterialPageRoute(builder: (context) => HomeScreen(currentUserId: prefs.getString('id'))),
+        MaterialPageRoute(builder: (context) => HomePage(currentUserId: prefs.getString('id'))),
       );
     }
 

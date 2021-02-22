@@ -101,7 +101,7 @@ class HomeScreenState extends State<HomeScreen> {
   void showNotification(message) async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       Platform.isAndroid ? 'com.dfa.musichive' : 'com.duytq.musichive',
-      'Flutter chat demo',
+      'Music hive',
       'your channel description',
       playSound: true,
       enableVibration: true,
