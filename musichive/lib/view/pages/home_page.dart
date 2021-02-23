@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:musichive/helper/demo_values.dart';
 import 'package:musichive/view/pages/chatlist.dart';
+import 'package:musichive/model/bottomAppBarContents.dart';
 import 'package:musichive/view/widgets/post_card.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -181,7 +182,14 @@ class HomePageState extends State<HomePage> {
             },
           ),
         ],
+
       ),
+      bottomNavigationBar:BottomAppBar(
+        color: Colors.white,
+        child: bottommAppBarContents(),
+      ) ,
+
+
       body: WillPopScope(
       child: ListView.builder(
          itemCount: DemoValues.posts.length,
