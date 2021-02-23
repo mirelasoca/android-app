@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'file:///C:/Users/Mirela/OneDrive/android-app/musichive/lib/view/pages/chat.dart';
-import 'package:musichive/const.dart';
+import 'package:musichive/view/presentation/const.dart';
 import 'file:///C:/Users/Mirela/OneDrive/android-app/musichive/lib/view/pages/settings.dart';
 import 'package:musichive/widget/loading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
