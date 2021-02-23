@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:musichive/view/presentation/const.dart';
-import 'package:musichive/view/pages/chatlist.dart';
+
 import 'package:musichive/widget/loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -83,7 +83,7 @@ class LoginScreenState extends State<LoginScreen> {
           'nickname': firebaseUser.displayName,
           'photoUrl': firebaseUser.photoURL,
           'id': firebaseUser.uid,
-          'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+          'joined': DateTime.now().millisecondsSinceEpoch.toString(),
           'chattingWith': null
         });
 
