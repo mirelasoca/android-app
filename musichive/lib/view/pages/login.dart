@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:musichive/const.dart';
-import 'package:musichive/home.dart';
+import 'package:musichive/view/pages/chatlist.dart';
 import 'package:musichive/widget/loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';

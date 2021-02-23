@@ -3,21 +3,22 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:musichive/helper/demo_values.dart';
+import 'package:musichive/view/pages/chatlist.dart';
 import 'package:musichive/view/widgets/post_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:musichive/chat.dart';
+import 'file:///C:/Users/Mirela/OneDrive/android-app/musichive/lib/view/pages/chat.dart';
 import 'package:musichive/const.dart';
-import 'package:musichive/settings.dart';
+import 'file:///C:/Users/Mirela/OneDrive/android-app/musichive/lib/view/pages/settings.dart';
 import 'package:musichive/widget/loading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../main.dart';
-
+import 'package:musichive/model/choices.dart';
 class HomePage extends StatefulWidget {
   //const HomePage({Key key}) : super(key: key);
   final String currentUserId;
@@ -32,6 +33,22 @@ class HomePageState extends State<HomePage> {
   final String currentUserId;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   bool isLoading = false;
+  List<Choice> choices = const <Choice>[
+    const Choice(title: 'Settings', icon: Icons.settings),
+    const Choice(title: 'Log out', icon: Icons.exit_to_app),
+    const Choice(title: 'Chat', icon: Icons.chat_bubble_outline_rounded),
+  ];
+  void onItemMenuPress(Choice choice) {
+    if (choice.title == 'Log out') {
+      handleSignOut();
+    } else if(choice.title =='Chat')
+    {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ChatList()));
+    }else
+    {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ChatSettings()));
+    }
+  }
 
   Future<bool> onBackPress() {
     openDialog();
@@ -143,6 +160,32 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("musichive"),
+        actions: <Widget>[
+          PopupMenuButton<Choice>(
+            onSelected: onItemMenuPress,
+            itemBuilder: (BuildContext context) {
+              return choices.map((Choice choice) {
+                return PopupMenuItem<Choice>(
+                    value: choice,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          choice.icon,
+                          color: primaryColor,
+                        ),
+                        Container(
+                          width: 10.0,
+                        ),
+                        Text(
+                          choice.title,
+                          style: TextStyle(color: primaryColor),
+                        ),
+                      ],
+                    ));
+              }).toList();
+            },
+          ),
+        ],
       ),
       body: WillPopScope(
       child: ListView.builder(
