@@ -7,7 +7,7 @@
 build/
 
 .flutter-plugins
-
+.flutter-plugins-dependecies
 # IntelliJ related
 *.iml
 *.ipr
