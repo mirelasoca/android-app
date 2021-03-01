@@ -23,6 +23,7 @@ class LoginScreenState extends State<LoginScreen> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   SharedPreferences prefs;
+  static SharedPreferences gprefs;
 
   bool isLoading = false;
   bool isLoggedIn = false;
@@ -40,6 +41,7 @@ class LoginScreenState extends State<LoginScreen> {
     });
 
     prefs = await SharedPreferences.getInstance();
+    gprefs = await SharedPreferences.getInstance();
 
     isLoggedIn = await googleSignIn.isSignedIn();
     if (isLoggedIn) {
@@ -79,25 +81,31 @@ class LoginScreenState extends State<LoginScreen> {
       final List<DocumentSnapshot> documents = result.docs;
       if (documents.length == 0) {
         // Update data to server if new user
+        final searchKeys = [];
+        firebaseUser.displayName.split(' ').forEach((element) { searchKeys.add(element.substring(0,1));});
         FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid).set({
           'nickname': firebaseUser.displayName,
           'photoUrl': firebaseUser.photoURL,
           'id': firebaseUser.uid,
           'joined': DateTime.now().millisecondsSinceEpoch.toString(),
-          'chattingWith': null
+          'chattingWith': null,
+          'searchKey': searchKeys,
+          //firebaseUser.displayName.substring(0, 1).toLowerCase(),
         });
 
-        // Write data to local
+        // Write data to locald
         currentUser = firebaseUser;
         await prefs.setString('id', currentUser.uid);
         await prefs.setString('nickname', currentUser.displayName);
         await prefs.setString('photoUrl', currentUser.photoURL);
+        await prefs.setStringList('searchKey', searchKeys);
       } else {
         // Write data to local
         await prefs.setString('id', documents[0].data()['id']);
         await prefs.setString('nickname', documents[0].data()['nickname']);
         await prefs.setString('photoUrl', documents[0].data()['photoUrl']);
         await prefs.setString('aboutMe', documents[0].data()['aboutMe']);
+        await prefs.setStringList('searchKey', documents[0].data()['searchkey']);
       }
       Fluttertoast.showToast(msg: "Sign in success");
       this.setState(() {

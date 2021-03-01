@@ -1,6 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'dart:io';
+// ignore: avoid_web_libraries_in_flutter
+//import 'dart:html';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -34,6 +36,7 @@ class SettingsScreen extends StatefulWidget {
 class SettingsScreenState extends State<SettingsScreen> {
   TextEditingController controllerNickname;
   TextEditingController controllerAboutMe;
+  TextEditingController controllersearchKey;
 
   SharedPreferences prefs;
 
@@ -41,12 +44,14 @@ class SettingsScreenState extends State<SettingsScreen> {
   String nickname = '';
   String aboutMe = '';
   String photoUrl = '';
+  List<String> searchKey = [];
 
   bool isLoading = false;
   File avatarImageFile;
 
   final FocusNode focusNodeNickname = FocusNode();
   final FocusNode focusNodeAboutMe = FocusNode();
+  final FocusNode focusNodesearchKey = FocusNode();
 
   @override
   void initState() {
@@ -60,8 +65,10 @@ class SettingsScreenState extends State<SettingsScreen> {
     nickname = prefs.getString('nickname') ?? '';
     aboutMe = prefs.getString('aboutMe') ?? '';
     photoUrl = prefs.getString('photoUrl') ?? '';
+    searchKey = prefs.getStringList('searchKey') ?? [];
 
     controllerNickname = TextEditingController(text: nickname);
+    //controllersearchKey = TextEditingController(text: searchKey);
     controllerAboutMe = TextEditingController(text: aboutMe);
 
     // Force refresh input
@@ -98,7 +105,8 @@ class SettingsScreenState extends State<SettingsScreen> {
           FirebaseFirestore.instance.collection('users').doc(id).update({
             'nickname': nickname,
             'aboutMe': aboutMe,
-            'photoUrl': photoUrl
+            'photoUrl': photoUrl,
+            'searchKey':searchKey,
           }).then((data) async {
             await prefs.setString('photoUrl', photoUrl);
             setState(() {
@@ -142,11 +150,13 @@ class SettingsScreenState extends State<SettingsScreen> {
     FirebaseFirestore.instance.collection('users').doc(id).update({
       'nickname': nickname,
       'aboutMe': aboutMe,
-      'photoUrl': photoUrl
+      'photoUrl': photoUrl,
+      'searchKey': searchKey,
     }).then((data) async {
       await prefs.setString('nickname', nickname);
       await prefs.setString('aboutMe', aboutMe);
       await prefs.setString('photoUrl', photoUrl);
+      await prefs.setStringList('searchKey', searchKey);
 
       setState(() {
         isLoading = false;
@@ -259,6 +269,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                         controller: controllerNickname,
                         onChanged: (value) {
                           nickname = value;
+                          searchKey.clear();
+                          nickname.toLowerCase().split(" ").forEach((element) {
+                            searchKey.add(element.substring(0,1));
+                          });
+                          //searchKey = nickname.substring(0,1).toLowerCase();
                         },
                         focusNode: focusNodeNickname,
                       ),

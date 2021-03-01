@@ -185,7 +185,8 @@ class HomePageState extends State<HomePage> {
 
       ),
       bottomNavigationBar:BottomAppBar(
-        color: Colors.white,
+        color: Colors.lightBlueAccent,
+        //shape: Shape,
         child: bottommAppBarContents(),
       ) ,
 
