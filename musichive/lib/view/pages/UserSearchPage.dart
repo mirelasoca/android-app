@@ -1,5 +1,9 @@
+import 'dart:ui';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:musichive/view/presentation/const.dart';
 
 class CloudFirestoreSearch extends StatefulWidget {
   @override
@@ -79,31 +83,37 @@ class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
               {
                 return ListView.builder(
                   itemCount: filteredUsers.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot data = filteredUsers[index];
-                    return Card(
-                      child: Row(
-                        children: <Widget>[
-                          Image.network(
-                            data.data()['photoUrl'],
-                            width: 150,
-                            height: 100,
-                            fit: BoxFit.fill,
-                          ),
-                          SizedBox(
-                            width: 25,
-                          ),
-                          Text(
-                            data.data()['nickname'],
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+                  itemBuilder: (context, index) =>ListTile(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    leading: Material (
+                    child :CachedNetworkImage(
+                      placeholder: (context, url) => Container(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1.0,
+                          valueColor:
+                          AlwaysStoppedAnimation<Color>(
+                              themeColor),
+                        ),
+                        width: 50.0,
+                        height:50.0,
+                        //padding: EdgeInsets.all(10.0),
                       ),
-                    );
-                  },
+                      imageUrl: filteredUsers[index].data()['photoUrl'],
+                      width: 50.0,
+                      height: 50.0,
+                      fit: BoxFit.cover,
+
+                    ),
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(45.0)),
+                      clipBehavior: Clip.hardEdge,
+                    ),
+                    //Icon( url:Wrapper.foundusers[index].data()['photoUrl']),
+                    title:Text(filteredUsers[index].data()['nickname']),
+
+                  ),
                 );
               }
 

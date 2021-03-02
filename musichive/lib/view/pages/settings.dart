@@ -197,7 +197,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                       ),
                                       width: 90.0,
                                       height: 90.0,
-                                      padding: EdgeInsets.all(20.0),
+                                      //padding: EdgeInsets.all(20.0),
                                     ),
                                     imageUrl: photoUrl,
                                     width: 90.0,

@@ -244,6 +244,7 @@ class UserSearch extends SearchDelegate<String> {
               //return Text(Wrapper.names[0]);
               return ListView.builder(
                 itemBuilder: (context, index) =>ListTile(
+                  //: ,
                   leading:CachedNetworkImage(
                     placeholder: (context, url) => Container(
                       child: CircularProgressIndicator(
