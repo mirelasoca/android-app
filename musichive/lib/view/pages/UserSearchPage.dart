@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:musichive/view/pages/OtherUserProfile.dart';
 import 'package:musichive/view/presentation/const.dart';
 
 class CloudFirestoreSearch extends StatefulWidget {
@@ -85,7 +86,7 @@ class _CloudFirestoreSearchState extends State<CloudFirestoreSearch> {
                   itemCount: filteredUsers.length,
                   itemBuilder: (context, index) =>ListTile(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile(userInfo: filteredUsers[index])));
                     },
                     leading: Material (
                     child :CachedNetworkImage(
