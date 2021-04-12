@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'view/presentation/const.dart';
 import 'view/pages/login.dart';
@@ -11,14 +12,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  @override
+    @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chat Demo',
+      title: 'MUSIC HIVE',
       theme: ThemeData(
         primaryColor: themeColor,
       ),
-      home: LoginScreen(title: 'CHAT DEMO'),
+      home: LoginScreen(title: 'MUSIC HIVE'),
       debugShowCheckedModeBanner: false,
     );
   }

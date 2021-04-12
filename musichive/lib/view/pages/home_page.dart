@@ -4,18 +4,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:musichive/helper/demo_values.dart';
 import 'package:musichive/view/pages/chatlist.dart';
+import 'package:musichive/model/bottomAppBarContents.dart';
 import 'package:musichive/view/widgets/post_card.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'file:///C:/Users/Mirela/OneDrive/android-app/musichive/lib/view/pages/chat.dart';
+
 import 'package:musichive/view/presentation/const.dart';
 import 'file:///C:/Users/Mirela/OneDrive/android-app/musichive/lib/view/pages/settings.dart';
-import 'package:musichive/widget/loading.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../main.dart';
 import 'package:musichive/model/choices.dart';
@@ -186,7 +182,15 @@ class HomePageState extends State<HomePage> {
             },
           ),
         ],
+
       ),
+      bottomNavigationBar:BottomAppBar(
+        color: Colors.lightBlueAccent,
+        //shape: Shape,
+        child: bottommAppBarContents(),
+      ) ,
+
+
       body: WillPopScope(
       child: ListView.builder(
          itemCount: DemoValues.posts.length,

@@ -3,21 +3,25 @@ import 'package:intl/intl.dart';
 
 class UserModel {
   final String id;
-  final String name;
+  final String nickname;
   final String email;
-  final String image;
-  final int followers;
+  final String photoUrl;
+  final List<String> followers;
+  final List<String> following;
+  final String chattingWith;
   final DateTime joined;
   final int posts;
 
   const UserModel({
     @required this.id,
-    @required this.name,
-    @required this.email,
-    @required this.image,
-    @required this.followers,
-    @required this.joined,
-    @required this.posts,
+    this.nickname,
+    this.email,
+    this.photoUrl,
+    this.followers,
+    this.following,
+    this.chattingWith,
+    this.joined,
+    this.posts,
   });
 
   String get postTimeFormatted => DateFormat.yMMMMEEEEd().format(joined);

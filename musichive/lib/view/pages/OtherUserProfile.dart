@@ -11,34 +11,38 @@ import 'package:musichive/view/presentation/const.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-SharedPreferences prefs;
-class ChatSettings extends StatelessWidget {
+
+class UserProfile extends StatelessWidget {
+  final DocumentSnapshot userInfo;
+
+  UserProfile({Key key, @required this.userInfo}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'SETTINGS',
+          'Buzzer',
           style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
-      body: SettingsScreen(),
+
+      body: OtherUserProfile(userInfo: userInfo),
     );
   }
 }
 
-class SettingsScreen extends StatefulWidget {
-  @override
-  State createState() => SettingsScreenState();
-}
+class OtherUserProfile extends StatelessWidget {
 
-class SettingsScreenState extends State<SettingsScreen> {
+
+  final DocumentSnapshot userInfo;
+
+  OtherUserProfile({Key key, @required this.userInfo}) : super(key: key);
   TextEditingController controllerNickname;
   TextEditingController controllerAboutMe;
   TextEditingController controllersearchKey;
 
-
+  SharedPreferences prefs;
 
   String id = '';
   String nickname = '';
@@ -55,7 +59,7 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void initState() {
-    super.initState();
+    //super.initState();
     readLocal();
   }
 
@@ -72,7 +76,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     controllerAboutMe = TextEditingController(text: aboutMe);
 
     // Force refresh input
-    setState(() {});
+   // setState(() {});
   }
 
   Future getImage() async {
@@ -84,10 +88,10 @@ class SettingsScreenState extends State<SettingsScreen> {
     File image = File(pickedFile.path);
 
     if (image != null) {
-      setState(() {
-        avatarImageFile = image;
-        isLoading = true;
-      });
+      // setState(() {
+      //   avatarImageFile = image;
+      //   isLoading = true;
+      // });
     }
     uploadFile();
   }
@@ -109,32 +113,32 @@ class SettingsScreenState extends State<SettingsScreen> {
             'searchKey':searchKey,
           }).then((data) async {
             await prefs.setString('photoUrl', photoUrl);
-            setState(() {
-              isLoading = false;
-            });
+            // setState(() {
+            //   isLoading = false;
+            // });
             Fluttertoast.showToast(msg: "Upload success");
           }).catchError((err) {
-            setState(() {
-              isLoading = false;
-            });
+            // setState(() {
+            //   isLoading = false;
+            // });
             Fluttertoast.showToast(msg: err.toString());
           });
         }, onError: (err) {
-          setState(() {
-            isLoading = false;
-          });
+          // setState(() {
+          //   isLoading = false;
+          // });
           Fluttertoast.showToast(msg: 'This file is not an image');
         });
       } else {
-        setState(() {
-          isLoading = false;
-        });
+        // setState(() {
+        //   isLoading = false;
+        // });
         Fluttertoast.showToast(msg: 'This file is not an image');
       }
     }, onError: (err) {
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
       Fluttertoast.showToast(msg: err.toString());
     });
   }
@@ -143,9 +147,9 @@ class SettingsScreenState extends State<SettingsScreen> {
     focusNodeNickname.unfocus();
     focusNodeAboutMe.unfocus();
 
-    setState(() {
-      isLoading = true;
-    });
+    // setState(() {
+    //   isLoading = true;
+    // });
 
     FirebaseFirestore.instance.collection('users').doc(id).update({
       'nickname': nickname,
@@ -158,15 +162,15 @@ class SettingsScreenState extends State<SettingsScreen> {
       await prefs.setString('photoUrl', photoUrl);
       await prefs.setStringList('searchKey', searchKey);
 
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
 
       Fluttertoast.showToast(msg: "Update success");
     }).catchError((err) {
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
 
       Fluttertoast.showToast(msg: err.toString());
     });
@@ -184,57 +188,46 @@ class SettingsScreenState extends State<SettingsScreen> {
                 child: Center(
                   child: Stack(
                     children: <Widget>[
-                      (avatarImageFile == null)
-                          ? (photoUrl != ''
-                              ? Material(
-                                  child: CachedNetworkImage(
-                                    placeholder: (context, url) => Container(
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2.0,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                themeColor),
-                                      ),
-                                      width: 90.0,
-                                      height: 90.0,
-                                      //padding: EdgeInsets.all(20.0),
-                                    ),
-                                    imageUrl: photoUrl,
-                                    width: 90.0,
-                                    height: 90.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(45.0)),
-                                  clipBehavior: Clip.hardEdge,
-                                )
-                              : Icon(
-                                  Icons.account_circle,
-                                  size: 90.0,
-                                  color: greyColor,
-                                ))
-                          : Material(
-                              child: Image.file(
-                                avatarImageFile,
-                                width: 90.0,
-                                height: 90.0,
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(45.0)),
-                              clipBehavior: Clip.hardEdge,
+                      (userInfo.data()['photoUrl'] != '')
+                          ? Material(
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) => Container(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.0,
+                              valueColor:
+                              AlwaysStoppedAnimation<Color>(
+                                  themeColor),
                             ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.camera_alt,
-                          color: primaryColor.withOpacity(0.5),
+                            width: 90.0,
+                            height: 90.0,
+                            //padding: EdgeInsets.all(20.0),
+                          ),
+                          imageUrl: userInfo.data()['photoUrl'],
+                          width: 90.0,
+                          height: 90.0,
+                          fit: BoxFit.cover,
                         ),
-                        onPressed: getImage,
-                        padding: EdgeInsets.all(30.0),
-                        splashColor: Colors.transparent,
-                        highlightColor: greyColor,
-                        iconSize: 30.0,
-                      ),
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(45.0)),
+                        clipBehavior: Clip.hardEdge,
+                      )
+                          : Icon(
+                        Icons.account_circle,
+                        size: 90.0,
+                        color: greyColor,
+                      )
+    ,
+                      // IconButton(
+                      //   icon: Icon(
+                      //     Icons.camera_alt,
+                      //     color: primaryColor.withOpacity(0.5),
+                      //   ),
+                      //   onPressed: () {},
+                      //   padding: EdgeInsets.all(30.0),
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: greyColor,
+                      //   iconSize: 30.0,
+                      // ),
                     ],
                   ),
                 ),
@@ -260,22 +253,12 @@ class SettingsScreenState extends State<SettingsScreen> {
                     child: Theme(
                       data: Theme.of(context)
                           .copyWith(primaryColor: primaryColor),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Sweetie',
-                          contentPadding: EdgeInsets.all(5.0),
-                          hintStyle: TextStyle(color: greyColor),
-                        ),
-                        controller: controllerNickname,
-                        onChanged: (value) {
-                          nickname = value;
-                          searchKey.clear();
-                          nickname.toLowerCase().split(" ").forEach((element) {
-                            searchKey.add(element.substring(0,1));
-                          });
-                          //searchKey = nickname.substring(0,1).toLowerCase();
-                        },
-                        focusNode: focusNodeNickname,
+                      child: Text(
+                      userInfo.data()['nickname'],
+                      style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          color: primaryColor),
                       ),
                     ),
                     margin: EdgeInsets.only(left: 30.0, right: 30.0),
@@ -283,12 +266,14 @@ class SettingsScreenState extends State<SettingsScreen> {
 
                   // About me
                   Container(
-                    child: Text(
+
+                      child:  Text(
                       'About me',
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
                           color: primaryColor),
+
                     ),
                     margin: EdgeInsets.only(left: 10.0, top: 30.0, bottom: 5.0),
                   ),
@@ -296,17 +281,12 @@ class SettingsScreenState extends State<SettingsScreen> {
                     child: Theme(
                       data: Theme.of(context)
                           .copyWith(primaryColor: primaryColor),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Fun, like travel and play PES...',
-                          contentPadding: EdgeInsets.all(5.0),
-                          hintStyle: TextStyle(color: greyColor),
-                        ),
-                        controller: controllerAboutMe,
-                        onChanged: (value) {
-                          aboutMe = value;
-                        },
-                        focusNode: focusNodeAboutMe,
+                      child: Text(
+                        userInfo.data()['aboutMe'],
+                        style: TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor),
                       ),
                     ),
                     margin: EdgeInsets.only(left: 30.0, right: 30.0),
@@ -316,21 +296,21 @@ class SettingsScreenState extends State<SettingsScreen> {
               ),
 
               // Button
-              Container(
-                child: FlatButton(
-                  onPressed: handleUpdateData,
-                  child: Text(
-                    'UPDATE',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  color: primaryColor,
-                  highlightColor: Color(0xff8d93a0),
-                  splashColor: Colors.transparent,
-                  textColor: Colors.white,
-                  padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-                ),
-                margin: EdgeInsets.only(top: 50.0, bottom: 50.0),
-              ),
+              // Container(
+              //   child: FlatButton(
+              //     onPressed: handleUpdateData,
+              //     child: Text(
+              //       'UPDATE',
+              //       style: TextStyle(fontSize: 16.0),
+              //     ),
+              //     color: primaryColor,
+              //     highlightColor: Color(0xff8d93a0),
+              //     splashColor: Colors.transparent,
+              //     textColor: Colors.white,
+              //     padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+              //   ),
+              //   margin: EdgeInsets.only(top: 50.0, bottom: 50.0),
+              // ),
             ],
           ),
           padding: EdgeInsets.only(left: 15.0, right: 15.0),
@@ -340,12 +320,12 @@ class SettingsScreenState extends State<SettingsScreen> {
         Positioned(
           child: isLoading
               ? Container(
-                  child: Center(
-                    child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(themeColor)),
-                  ),
-                  color: Colors.white.withOpacity(0.8),
-                )
+            child: Center(
+              child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(themeColor)),
+            ),
+            color: Colors.white.withOpacity(0.8),
+          )
               : Container(),
         ),
       ],
