@@ -1,7 +1,7 @@
 
 //import 'dart:html';
 import 'package:musichive/view/pages/chatlist.dart';
-import 'package:musichive/view/pages/search_page.dart';
+
 import 'package:musichive/view/pages/UserSearchPage.dart';
 import 'package:flutter/material.dart';
 class bottommAppBarContents extends StatelessWidget {

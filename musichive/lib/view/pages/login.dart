@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:musichive/view/pages/home_page.dart';
+User currentUser;
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key, this.title}) : super(key: key);
 
@@ -27,7 +28,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   bool isLoading = false;
   bool isLoggedIn = false;
-  User currentUser;
+
 
   @override
   void initState() {
@@ -82,6 +83,10 @@ class LoginScreenState extends State<LoginScreen> {
       if (documents.length == 0) {
         // Update data to server if new user
         final searchKeys = [];
+        final requests = [];
+        final followers = [];
+        final following = [];
+        final requested = [];
         firebaseUser.displayName.split(' ').forEach((element) { searchKeys.add(element.substring(0,1));});
         FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid).set({
           'nickname': firebaseUser.displayName,
@@ -90,6 +95,10 @@ class LoginScreenState extends State<LoginScreen> {
           'joined': DateTime.now().millisecondsSinceEpoch.toString(),
           'chattingWith': null,
           'searchKey': searchKeys,
+          'requests': requests,
+          'requested': requested,
+          'followers': followers,
+          'following': following,
           //firebaseUser.displayName.substring(0, 1).toLowerCase(),
         });
 

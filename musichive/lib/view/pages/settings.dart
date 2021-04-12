@@ -11,7 +11,7 @@ import 'package:musichive/view/presentation/const.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+SharedPreferences prefs;
 class ChatSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   TextEditingController controllerAboutMe;
   TextEditingController controllersearchKey;
 
-  SharedPreferences prefs;
+
 
   String id = '';
   String nickname = '';
