@@ -3,6 +3,7 @@
 import 'package:musichive/view/pages/chatlist.dart';
 
 import 'package:musichive/view/pages/UserSearchPage.dart';
+import 'package:musichive/view/pages/AddNewPostPage.dart';
 import 'package:flutter/material.dart';
 class bottommAppBarContents extends StatelessWidget {
 
@@ -38,7 +39,15 @@ class bottommAppBarContents extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ChatList()));
             }
-        )
+        ),
+            IconButton(icon: Icon(
+              Icons.library_add,
+
+            ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewPostPage()));
+                }
+            )
 
 
     ],
