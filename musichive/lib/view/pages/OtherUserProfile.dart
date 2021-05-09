@@ -11,6 +11,7 @@ import 'package:musichive/view/presentation/const.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:musichive/model/bottomAppBarContents.dart';
 
 class UserProfile extends StatelessWidget {
   final DocumentSnapshot userInfo;
@@ -26,6 +27,12 @@ class UserProfile extends StatelessWidget {
         ),
         centerTitle: true,
       ),
+
+      bottomNavigationBar:BottomAppBar(
+        color: Colors.lightBlueAccent,
+        //shape: Shape,
+        child: bottommAppBarContents(),
+      ) ,
 
       body: OtherUserProfile(userInfo: userInfo),
     );
